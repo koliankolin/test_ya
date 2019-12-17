@@ -36,7 +36,7 @@ class CounterByThreads:
     def _is_valid_line(line: str) -> bool:
         return len(line) == 6
 
-    def _write_stats_for_chunk_to_queue(self, chunk: list):
+    def _write_stats_from_chunk(self, chunk: list):
         for line in chunk:
             line = line.strip()
             if self._is_valid_line(line):
@@ -57,7 +57,7 @@ class CounterByThreads:
         with open(self.file_name, 'r') as f:
             while True:
                 lines = list(itertools.islice(f, self._chunk_size))
-                thread = Thread(target=self._write_stats_for_chunk_to_queue, args=(lines,))
+                thread = Thread(target=self._write_stats_from_chunk, args=(lines,))
                 thread.start()
                 threads.append(thread)
                 if not lines:
