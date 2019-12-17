@@ -1,8 +1,6 @@
-from queue import Queue
 from threading import Thread
 import itertools
 from pathlib import Path
-import time
 
 class CounterByThreads:
     def __init__(self, file_name, chunk_size=10000):
